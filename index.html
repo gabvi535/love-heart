@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Программируемая Любовь - Сердце из текста</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000000; /* Темный фон, как на видео */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden; /* Чтобы не было полос прокрутки */
+        }
+
+        .heart-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+        }
+
+        @keyframes float {
+    0% {
+        opacity: 0;
+        transform: translateY(10px) scale(0.8);
+    }
+    10% {
+        opacity: 1;
+        transform: translateY(0px) scale(1);
+    }
+    80% {
+        opacity: 1;
+        transform: translateY(-5px) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-15px) scale(0.8);
+    }
+}
+
+        /* Определение анимации пульсации */
+       .text-element {
+    position: absolute;
+    color: #fc38cb;
+    font-family: Arial, sans-serif;
+    font-size: 10px;
+    font-weight: bold;
+    white-space: nowrap;
+    text-shadow: 0 0 5px #ff69b4;
+
+    opacity: 0;
+
+    animation: float 4s infinite linear;
+}
+
+    </style>
+</head>
+<body>
+
+    <div class="heart-container" id="heart">
+        </div>
+
+    <script>
+        const heartContainer = document.getElementById('heart');
+        const textToDisplay = "I love you";
+        const numberOfElements = 60; // Количество надписей в сердце
+
+        for (let i = 0; i < numberOfElements; i++) {
+            // Создаем новый элемент span
+            const span = document.createElement('span');
+            span.innerText = textToDisplay;
+            span.classList.add('text-element');
+
+            // --- Расчет позиции (x, y) для формы сердца ---
+            // Мы используем параметрические уравнения для сердца
+            // t - это параметр от 0 до 2*PI
+            const t = (i / numberOfElements) * 2 * Math.PI;
+            
+            // Уравнения для координат X и Y (нормализованные)
+            let x = 16 * Math.pow(Math.sin(t), 3);
+            let y = 13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t);
+
+            // Масштабируем и центрируем координаты внутри контейнера
+            const scaleFactor = 10; // Коэффициент масштаба для размера сердца
+            const centerX = 150;     // Центр контейнера по X
+            const centerY = 130;     // Центр контейнера по Y (смещен чуть вверх)
+
+            const posX = centerX + x * scaleFactor;
+            const posY = centerY - y * scaleFactor; // Инвертируем Y, так как в браузере Y растет вниз
+
+            // Устанавливаем позицию элемента
+            span.style.left = `${posX}px`;
+            span.style.top = `${posY}px`;
+
+            // --- Настройка задержки анимации ---
+            // Это создает эффект последовательного появления
+            const delay = (i / numberOfElements) * 4; // Задержка от 0 до 4 секунд
+            span.style.animationDelay = `${delay}s`;
+
+            // Добавляем элемент в контейнер
+            heartContainer.appendChild(span);
+        }
+    </script>
+
+</body>
+</html>
