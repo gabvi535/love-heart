@@ -1,109 +1,122 @@
-<!DOCTYPE html>
-<html lang="ru">
+<!doctype html>
+<html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Программируемая Любовь - Сердце из текста</title>
+    <meta charset="utf-8">
+    <title>Portfolio i Informacje</title>
     <style>
-        body {
+        html, body {
             margin: 0;
             padding: 0;
-            background-color: #000000; /* Темный фон, как на видео */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            overflow: hidden; /* Чтобы не было полос прокрутки */
+            width: 100%;
+            min-height: 100vh;
         }
 
-        .heart-container {
-            position: relative;
-            width: 300px;
-            height: 300px;
+        body {
+            background: linear-gradient(135deg, #1F531C 0%, #652224 100%);
+            background-attachment: fixed;
+            font-family: Arial, sans-serif;
+            padding: 40px 20px;
+            box-sizing: border-box;
+            color: #333333;
         }
 
-        @keyframes float {
-    0% {
-        opacity: 0;
-        transform: translateY(10px) scale(0.8);
-    }
-    10% {
-        opacity: 1;
-        transform: translateY(0px) scale(1);
-    }
-    80% {
-        opacity: 1;
-        transform: translateY(-5px) scale(1);
-    }
-    100% {
-        opacity: 0;
-        transform: translateY(-15px) scale(0.8);
-    }
-}
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
 
-        /* Определение анимации пульсации */
-       .text-element {
-    position: absolute;
-    color: #fc38cb;
-    font-family: Arial, sans-serif;
-    font-size: 10px;
-    font-weight: bold;
-    white-space: nowrap;
-    text-shadow: 0 0 5px #ff69b4;
+        .card {
+            background-color: #ffffff;
+            border-radius: 16px;
+            padding: 25px 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15), 
+                        0 4px 6px rgba(0, 0, 0, 0.1);
+        }
 
-    opacity: 0;
+        h1, h2 {
+            margin-top: 0;
+            color: #2d3748;
+        }
 
-    animation: float 4s infinite linear;
-}
+        h1 {
+            text-align: center;
+        }
 
+        a {
+            color: #3182ce;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        ul {
+            padding-left: 20px;
+            line-height: 1.6;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
     </style>
 </head>
 <body>
 
-    <div class="heart-container" id="heart">
+    <div class="container">
+
+        <!-- Карточка 1: Информация о пользователе -->
+        <div class="card">
+            <h1>Profil i Informacje Zawodowe</h1>
+            
+            <!-- Меню навигации по страницам -->
+            <nav style="text-align: center; margin-bottom: 25px;">
+    <a href="index.html" style="margin: 0 10px;">Strona Główna</a> |
+    <a href="portfolio.html" style="margin: 0 10px;">Moje Prace</a> |
+    <a href="omnie.html" style="margin: 0 10px;">O Mnie</a> |
+    <a href="kontakt.html" style="margin: 0 10px;">Kontakt</a>
+</nav>
+
+            <!-- Info o mnie -->
+            <div style="background-color: #f7fafc; padding: 12px 18px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #3182ce;">
+                <p style="margin: 0; font-size: 16px;">
+                    <b>Imię i nazwisko:</b> Viktoriia Korniienko<br>
+                    <b>Wiek:</b> 18 lat
+                </p>
+            </div>
+            <p style="text-align: justify;">
+                Strona mojej głowy
+            </p>
+
+            <ul>
+                <li><b>Cel :</b> Żeby było.</li>
+                <li><b>Umiejętności:</b> Spać, jeść, siedzieć w telefonie.</li>
+                <li><b>Co nie umię:</b> Wszystko.</li>
+                <li><b>Lekcja:</b> Rejestracja obrazu.</li>
+            </ul>
         </div>
 
-    <script>
-        const heartContainer = document.getElementById('heart');
-        const textToDisplay = "I love you";
-        const numberOfElements = 60; // Количество надписей в сердце
+        <!-- Карточка 2: Изображение -->
+        <div class="card">
+            <h2>Materiał graficzny</h2>
+            <p>Prezentacja osadzonego zasobu wizualnego w strukturzie strony:</p>
+            <div style="text-align: center;">
+                <img src="foto.jpg" alt="Przykładowy obrazek" style="border-radius: 8px; max-width: 100%;">
+            </div>
+        </div>
 
-        for (let i = 0; i < numberOfElements; i++) {
-            // Создаем новый элемент span
-            const span = document.createElement('span');
-            span.innerText = textToDisplay;
-            span.classList.add('text-element');
+        <!-- Карточка 3: Ссылки -->
+        <div class="card">
+            <h2>Dokumentacja i odsyłacze</h2>
+            <ul>
+                <li>Instagram: <a href="https://www.instagram.com/im.diaz.lee?cplk=a2tudHh5cmRhYTJh" target="_blank">Acсount</a></li>
+                <li>Kontakt elektroniczny: <a href="mailto:kornienkov535@gmail.com">Wyślij wiadomość e-mail</a></li>
+            </ul>
+        </div>
 
-            // --- Расчет позиции (x, y) для формы сердца ---
-            // Мы используем параметрические уравнения для сердца
-            // t - это параметр от 0 до 2*PI
-            const t = (i / numberOfElements) * 2 * Math.PI;
-            
-            // Уравнения для координат X и Y (нормализованные)
-            let x = 16 * Math.pow(Math.sin(t), 3);
-            let y = 13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t);
-
-            // Масштабируем и центрируем координаты внутри контейнера
-            const scaleFactor = 10; // Коэффициент масштаба для размера сердца
-            const centerX = 150;     // Центр контейнера по X
-            const centerY = 130;     // Центр контейнера по Y (смещен чуть вверх)
-
-            const posX = centerX + x * scaleFactor;
-            const posY = centerY - y * scaleFactor; // Инвертируем Y, так как в браузере Y растет вниз
-
-            // Устанавливаем позицию элемента
-            span.style.left = `${posX}px`;
-            span.style.top = `${posY}px`;
-
-            // --- Настройка задержки анимации ---
-            // Это создает эффект последовательного появления
-            const delay = (i / numberOfElements) * 4; // Задержка от 0 до 4 секунд
-            span.style.animationDelay = `${delay}s`;
-
-            // Добавляем элемент в контейнер
-            heartContainer.appendChild(span);
-        }
-    </script>
+    </div>
 
 </body>
 </html>
